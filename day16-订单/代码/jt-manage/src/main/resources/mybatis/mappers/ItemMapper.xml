@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.manage.mapper.ItemMapper">
+	<!-- 如果以字段名称为参数时必须用$
+		${start},${rows}
+		$符  没有预编译效果  直接取值传参 
+		#号  预编译的效果.为参数添加""号
+		能用#号不用$   
+	-->
+	<select id="findItemListByPage" resultType="Item">
+		select * from tb_item 
+				order by updated desc 
+				limit #{start},#{rows}
+	</select>
+	
+	<!--批量修改  key=ids value=Long[]-->
+	<update id="updateStatus">
+		update tb_item set status = #{status},updated = now()
+		where id in	(
+		<foreach collection="ids" item="id" separator=",">
+			#{id}
+		</foreach>
+		)
+	</update>
+</mapper>

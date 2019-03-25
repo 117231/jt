@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: prod
+---   #定义环境
+#规则定义:使用yml文件注意层级(缩进)
+#:号与值之间添加空格
+spring:
+  profiles: prod
+server:
+  port: 8091
+  servlet:
+    context-path: /  #指定项目发布路径
+
+#定义user的yml配置项
+user:
+  id: 100
+  username: 蜡笔小新 #取值时不要写user.name获取的是计算机名称
+  age: 5
+
+---  #编辑研发环境
+spring:
+  profiles: dev
+server:
+  port: 8080
+  servlet:
+    context-path: /jt  
+user:
+  id: 100
+  username: 蜡笔小新 #取值时不要写user.name获取的是计算机名称
+  age: 5
+  
+  
+  
+  

@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!--1.创建objectMapper  -->
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	
+	<!--spring整合redis集群  -->
+	<bean id="jedisCluster" class="com.jt.common.factory.JedisClusterFactory"/>
+	
+	<!--2.实现哨兵的配置  -->
+	<!-- <bean id="jedisSentinelPool" class="redis.clients.jedis.JedisSentinelPool">
+		<constructor-arg name="masterName" 
+				value="${redis.masterName}"/>
+		<constructor-arg name="sentinels">
+			<set>
+				<value>${redis.node1}</value>
+			</set>
+		</constructor-arg>
+	</bean> -->
+	<!--value如果存储字符串/基本类型-->
+	<!--ref存储对象-->	
+	<!--2.redis分片  -->
+	<!-- <bean id="shardJedis" class="redis.clients.jedis.ShardedJedis">
+		<constructor-arg name="shards">
+			<list>
+				<ref bean="info1"/>
+				<ref bean="info2"/>
+				<ref bean="info3"/>
+			</list>
+		</constructor-arg>
+	</bean> -->
+	
+	<!-- <bean id="info1" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg name="host" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port.a}"/>
+	</bean>
+	<bean id="info2" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg name="host" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port.b}"/>
+	</bean>
+	<bean id="info3" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg name="host" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port.c}"/>
+	</bean> -->
+
+	<!--2.创建Jedis对象  -->
+	<!-- <bean id="jedis" class="redis.clients.jedis.Jedis">
+		<constructor-arg name="host" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port}"/>
+	</bean> -->
+</beans>

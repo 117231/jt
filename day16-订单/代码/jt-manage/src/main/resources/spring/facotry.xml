@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!--1.静态工厂   Class.静态方法()-->
+	<bean id="calendar1" 
+	class="com.jt.manage.factory.StaticFactory" 
+	factory-method="getInstance"/>
+	
+	<!--2.实例工厂  工厂对象.方法()  -->
+	<bean id="instanceFactory" 
+		  class="com.jt.manage.factory.InstanceFactory"/>
+	<bean id="calendar2" 
+			factory-bean="instanceFactory"
+			factory-method="getInstance"/>
+	
+	<!--3.spring工厂实现  -->
+	<bean id="calendar3" 
+	class="com.jt.manage.factory.SpringFactory"/>
+	
+	
+	
+	
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="jt-manage" version="2.5">
+	<display-name>jt-manage</display-name>
+	
+	<!--1.配置前端控制器  -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/application*.xml</param-value>
+		</init-param>
+		<!--表示当tomcat容器运行时,第一个加载  -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!--
+		url-pattern:如果用户发起请求与拦截路径匹配.
+		则请求会执行对应的servlet
+		1. *.do  要求请求全部以.do结尾
+		2. /     拦截所有的请求和静态资源,放行jsp等动态请求(规定)
+		3. /*    统统都要拦截  index.jsp,千万不要加/*
+	  -->
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!--2.定义POST乱码解决  -->
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<!--定义初始化参数  -->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
